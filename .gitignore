@@ -1,0 +1,7 @@
+*.d
+*.elf
+*.iso
+*.o
+
+iso_root/
+limine/
