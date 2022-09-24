@@ -1,7 +1,11 @@
+*.asm
 *.d
 *.elf
 *.iso
+*.out
 *.o
 
 iso_root/
 limine/
+
+!src/sys.asm

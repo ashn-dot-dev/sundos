@@ -1,0 +1,5 @@
+import "sys.sunder";
+
+func main() void {
+    sys::terminal_write("Hello SundOS");
+}
