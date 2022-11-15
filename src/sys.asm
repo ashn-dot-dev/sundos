@@ -1,3 +1,5 @@
+default rel
+
 extern terminal_write
 
 section .text
