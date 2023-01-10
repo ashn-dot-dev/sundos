@@ -1,0 +1,88 @@
+### #define LIMINE_COMMON_MAGIC 0xc7b1dd30df4c8b88, 0x0a82e883a194f07b
+const LIMINE_COMMON_MAGIC = (:[2]u64)[0xc7b1dd30df4c8b88, 0x0a82e883a194f07b];
+
+### #define LIMINE_TERMINAL_REQUEST { LIMINE_COMMON_MAGIC, 0xc8ac59310c2b0844, 0xa68d0c7265d38878 }
+const LIMINE_TERMINAL_REQUEST = (:[4]u64)[LIMINE_COMMON_MAGIC[0], LIMINE_COMMON_MAGIC[1], 0xc8ac59310c2b0844, 0xa68d0c7265d38878];
+
+# Requires SysV calling convention.
+### typedef void (*limine_terminal_write)(struct limine_terminal *, const char *, uint64_t);
+alias limine_terminal_write = *any;
+
+# Call a limine_terminal_write function with the SysV calling convention.
+extern func call_limine_terminal_write(write: limine_terminal_write, terminal: *limine_terminal, start: *byte, count: u64) void;
+
+# Requires SysV calling convention.
+### typedef void (*limine_terminal_callback)(struct limine_terminal *, uint64_t, uint64_t, uint64_t, uint64_t);
+alias limine_terminal_callback = *any;
+
+### struct limine_terminal {
+###     uint64_t columns;
+###     uint64_t rows;
+###     LIMINE_PTR(struct limine_framebuffer *) framebuffer;
+### };
+struct limine_terminal {
+    var columns: u64;
+    var rows: u64;
+    var framebuffer: *limine_framebuffer;
+}
+
+### struct limine_terminal_response {
+###     uint64_t revision;
+###     uint64_t terminal_count;
+###     LIMINE_PTR(struct limine_terminal **) terminals;
+###     LIMINE_PTR(limine_terminal_write) write;
+### };
+struct limine_terminal_response {
+    var revision: u64;
+    var terminal_count: u64;
+    var terminals: **limine_terminal;
+    var write: limine_terminal_write;
+}
+
+### struct limine_terminal_request {
+###     uint64_t id[4];
+###     uint64_t revision;
+###     LIMINE_PTR(struct limine_terminal_response *) response;
+###     LIMINE_PTR(limine_terminal_callback) callback;
+### };
+struct limine_terminal_request {
+    var id: [4]u64;
+    var revision: u64;
+    var response: *limine_terminal_response;
+    var callback: limine_terminal_callback;
+}
+
+### struct limine_framebuffer {
+###     LIMINE_PTR(void *) address;
+###     uint64_t width;
+###     uint64_t height;
+###     uint64_t pitch;
+###     uint16_t bpp;
+###     uint8_t memory_model;
+###     uint8_t red_mask_size;
+###     uint8_t red_mask_shift;
+###     uint8_t green_mask_size;
+###     uint8_t green_mask_shift;
+###     uint8_t blue_mask_size;
+###     uint8_t blue_mask_shift;
+###     uint8_t unused[7];
+###     uint64_t edid_size;
+###     LIMINE_PTR(void *) edid;
+### };
+struct limine_framebuffer {
+    var address: *any;
+    var width: u64;
+    var height: u64;
+    var pitch: u64;
+    var bpp: u16;
+    var memory_model: u8;
+    var red_mask_size: u8;
+    var red_mask_shift: u8;
+    var green_mask_size: u8;
+    var green_mask_shift: u8;
+    var blue_mask_size: u8;
+    var blue_mask_shift: u8;
+    var unused: [7]u8;
+    var edid_size: u64;
+    var edid: *any;
+}

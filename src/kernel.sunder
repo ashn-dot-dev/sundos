@@ -1,5 +1,5 @@
-import "sys.sunder";
+import "terminal.sunder";
 
 func main() void {
-    sys::terminal_write("Hello SundOS");
+    terminal::write("Hello SundOS!");
 }

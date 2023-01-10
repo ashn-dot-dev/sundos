@@ -1,3 +1,0 @@
-namespace sys;
-
-extern func terminal_write(buf: []byte) void;

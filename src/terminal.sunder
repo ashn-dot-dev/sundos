@@ -1,0 +1,20 @@
+namespace terminal;
+import "limine.sunder";
+
+var request = (:limine_terminal_request){
+    .id = LIMINE_TERMINAL_REQUEST,
+    .revision = 0,
+    .response = uninit,
+    .callback = uninit
+};
+
+func write(buf: []byte) void {
+    var writefunc = request.response.*.write;
+    var terminals = (:[]*limine_terminal){
+        request.response.*.terminals,
+        (:usize)request.response.*.terminal_count
+    };
+    var start = startof(buf);
+    var count = (:u64)countof(buf);
+    call_limine_terminal_write(writefunc, terminals[0], start, count);
+}

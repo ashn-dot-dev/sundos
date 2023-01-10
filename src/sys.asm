@@ -1,16 +1,20 @@
 default rel
 
-extern terminal_write
-
+; rbp + 0x28 => write: limine_terminal_write
+; rbp + 0x20 => terminal: *limine_terminal
+; rbp + 0x18 => start: *byte
+; rbp + 0x10 => count: u64
 section .text
-sys.terminal_write:
+call_limine_terminal_write:
     push rbp
     mov rbp, rsp
 
+    mov rdi, [rbp + 0x20] ; terminal
+    mov rsi, [rbp + 0x18] ; start
+    mov rdx, [rbp + 0x10] ; count
+
     and rsp, 0xfffffffffffffff0
-    mov rdi, [rbp + 0x10]
-    mov rsi, [rbp + 0x18]
-    call terminal_write
+    call [rbp + 0x28] ; call write
 
     mov rsp, rbp
     pop rbp
@@ -22,14 +26,8 @@ done:
     jmp done
 
 section .text
-__dump:
-    ret
-
-section .text
 __fatal:
-    hlt
-
-extern main
+    call done
 
 section .text
 global _start
