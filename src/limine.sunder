@@ -1,8 +1,5 @@
 ### #define LIMINE_COMMON_MAGIC 0xc7b1dd30df4c8b88, 0x0a82e883a194f07b
-const LIMINE_COMMON_MAGIC = (:[2]u64)[0xc7b1dd30df4c8b88, 0x0a82e883a194f07b];
-
 ### #define LIMINE_TERMINAL_REQUEST { LIMINE_COMMON_MAGIC, 0xc8ac59310c2b0844, 0xa68d0c7265d38878 }
-const LIMINE_TERMINAL_REQUEST = (:[4]u64)[LIMINE_COMMON_MAGIC[0], LIMINE_COMMON_MAGIC[1], 0xc8ac59310c2b0844, 0xa68d0c7265d38878];
 
 # Requires SysV calling convention.
 ### typedef void (*limine_terminal_write)(struct limine_terminal *, const char *, uint64_t);

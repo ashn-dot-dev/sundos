@@ -2,7 +2,12 @@ namespace terminal;
 import "limine.sunder";
 
 var request = (:limine_terminal_request){
-    .id = LIMINE_TERMINAL_REQUEST,
+    .id = (:[4]u64)[
+        0xc7b1dd30df4c8b88, # LIMINE_TERMINAL_REQUEST[0] (common magic)
+        0x0a82e883a194f07b, # LIMINE_TERMINAL_REQUEST[1] (common magic)
+        0xc8ac59310c2b0844, # LIMINE_TERMINAL_REQUEST[2]
+        0xa68d0c7265d38878  # LIMINE_TERMINAL_REQUEST[3]
+    ],
     .revision = 0,
     .response = uninit,
     .callback = uninit
