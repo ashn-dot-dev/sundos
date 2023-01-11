@@ -13,7 +13,7 @@ var request = (:limine_terminal_request){
     .callback = uninit
 };
 
-func write(buf: []byte) void {
+func print(buf: []byte) void {
     var writefunc = request.response.*.write;
     var terminals = (:[]*limine_terminal){
         request.response.*.terminals,
