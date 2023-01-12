@@ -10,5 +10,4 @@ set -eux
 #   $ gdb -q --tui iso_root/sundos.elf
 #   (gdb) target remote localhost:1234
 #   (gdb) continue
-#qemu-system-x86_64 -s -S -m 512 -drive file=sundos.iso,format=raw
 qemu-system-x86_64 -m 512 -drive file=sundos.iso,format=raw
