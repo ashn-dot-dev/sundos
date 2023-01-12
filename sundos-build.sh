@@ -3,7 +3,12 @@ set -eux
 
 # Compile the Kernel #
 
-SUNDER_SYSASM_PATH=src/sys.asm sunder-compile -k -l '-nostdlib' -l '-static' -l '-m' -l 'elf_x86_64' -l '-z' -l 'max-page-size=0x1000' -l '-T' -l 'linker.ld' -o sundos.elf src/kernel.sunder
+SUNDER_SYSASM_PATH=src/sys.asm sunder-compile \
+    -o sundos.elf -k \
+    -l '-m' -l 'elf_x86_64' \
+    -l '-z' -l 'max-page-size=0x1000' \
+    -l '-T' -l 'linker.ld' \
+    src/kernel.sunder
 
 # Create the ISO #
 
