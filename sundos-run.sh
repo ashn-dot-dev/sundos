@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eux
 
-# To debug the Kernel with GDB, eun QEMU with the `-s` and `-S` flags:
+# To debug the Kernel with GDB, run QEMU with the `-s` and `-S` flags:
 #
 #   $ qemu-system-x86_64 -s -S -m 512 -drive file=sundos.iso,format=raw
 #
