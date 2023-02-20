@@ -21,5 +21,8 @@ func print(buf: []byte) void {
     };
     var start = startof(buf);
     var count = (:u64)countof(buf);
-    call_limine_terminal_write(writefunc, terminals[0], start, count);
+
+    for i in countof(terminals) {
+        call_limine_terminal_write(writefunc, terminals[i], start, count);
+    }
 }
