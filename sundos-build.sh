@@ -3,7 +3,9 @@ set -eux
 
 # Compile the Kernel #
 
-SUNDER_SYSASM_PATH=src/sys.asm sunder-compile \
+export SUNDER_BACKEND=nasm
+export SUNDER_SYSASM_PATH=src/sys.asm
+sunder-compile \
     -o sundos.elf -k \
     -l '-m' -l 'elf_x86_64' \
     -l '-z' -l 'max-page-size=0x1000' \
